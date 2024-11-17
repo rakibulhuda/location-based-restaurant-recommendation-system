@@ -2,7 +2,6 @@ package sqa.project.back_end.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 

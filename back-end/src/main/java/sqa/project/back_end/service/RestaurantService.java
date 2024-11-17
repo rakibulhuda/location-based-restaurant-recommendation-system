@@ -14,6 +14,14 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
+    public void registerRestaurants(Restaurant restaurant){
+        if(restaurantRepository.existsByRestaurantName(restaurant.getRestaurantName())){
+            throw new RuntimeException("Restaurant Already existed");
+        }
+        restaurantRepository.save(restaurant);
+        System.out.println(restaurant);
+    }
+
     public List<Restaurant> getAllRestaurants() {
         return restaurantRepository.findAll();
     }

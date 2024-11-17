@@ -1,6 +1,7 @@
 package sqa.project.back_end.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sqa.project.back_end.models.Restaurant;
@@ -38,9 +39,14 @@ public class RestaurantController {
         return restaurantService.getEatOutRestaurants();
     }
 
-    @PostMapping
-    public Restaurant createRestaurant(@RequestBody Restaurant restaurant) {
-        return restaurantService.saveRestaurant(restaurant);
+    @PostMapping("register")
+    public ResponseEntity<?> registerRestaurants(@RequestBody Restaurant restaurant){
+        try {
+            restaurantService.registerRestaurants(restaurant);
+            return new ResponseEntity<>(restaurant, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")

@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Entity
 public class Restaurant implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long restaurantId;
 
     @JsonProperty("restaurantName")
