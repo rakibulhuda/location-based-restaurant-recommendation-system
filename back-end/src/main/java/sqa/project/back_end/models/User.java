@@ -1,15 +1,24 @@
 package sqa.project.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
+
 import java.io.Serializable;
 
 @Entity
 public class User implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
+
+    @JsonProperty("userName")
     private String userName;
+
+    @JsonProperty("userEmail")
     private String userEmail;
+
+    @JsonProperty("userPassword")
     private String userPassword;
 
     public User(){}
@@ -29,6 +38,7 @@ public class User implements Serializable{
         this.userId = id;
     }
 
+    @JsonProperty("userName")
     public String getUsername() {
         return userName;
     }
@@ -37,6 +47,7 @@ public class User implements Serializable{
         this.userName = username;
     }
 
+    @JsonProperty("userEmail")
     public String getEmail() {
         return userEmail;
     }
@@ -45,6 +56,7 @@ public class User implements Serializable{
         this.userEmail = email;
     }
 
+    @JsonProperty("userPassword")
     public String getPassword() {
         return userPassword;
     }

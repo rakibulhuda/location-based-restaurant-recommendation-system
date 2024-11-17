@@ -5,6 +5,6 @@ import sqa.project.back_end.models.User;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUserId(Long userId);
-    boolean existsByUserId(Long userId);
+    User findByUserName(String userName);
+    boolean existsByUserName(String userName);
 }

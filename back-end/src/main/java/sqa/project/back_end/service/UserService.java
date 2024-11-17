@@ -5,26 +5,31 @@ import org.springframework.stereotype.Service;
 import sqa.project.back_end.models.User;
 import sqa.project.back_end.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    public User registerUser(User user) {
-        if (userRepository.existsByUserId(user.getUserId())) {
+    public List<User> getAll(){
+        return userRepository.findAll();
+    }
+
+    public void registerUser(User user) {
+        if (userRepository.existsByUserName(user.getUsername())) {
             throw new RuntimeException("Username is already taken");
         }
-        user.setPassword(user.getPassword());
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
-    public User findByUserId(Long userId) {
-        return userRepository.findByUserId(userId);
+    public User findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
-    public boolean authenticateUser(Long userId, String password) {
-        User user = findByUserId(userId);
+    public boolean authenticateUser(String userName, String password) {
+        User user = findByUserName(userName);
         return password.equals(user.getPassword());
     }
 

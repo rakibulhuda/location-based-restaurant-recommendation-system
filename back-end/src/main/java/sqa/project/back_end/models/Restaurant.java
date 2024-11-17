@@ -1,5 +1,6 @@
 package sqa.project.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
@@ -8,13 +9,29 @@ public class Restaurant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long restaurantId;
+
+    @JsonProperty("restaurantName")
     private String restaurantName;
+
+    @JsonProperty("restaurantDistance")
     private double restaurantDistance;
+
+    @JsonProperty("cuisineType")
     private String cuisineType;
+
+    @JsonProperty("restaurantRating")
     private double restaurantRating;
+
+    @JsonProperty("restaurantRank")
     private int restaurantRank;
+
+    @JsonProperty("deliveryTips")
     private double deliveryTips;
+
+    @JsonProperty("estimatedDeliveryTime")
     private int estimatedDeliveryTime;
+
+    @JsonProperty("isPickup")
     private boolean isPickup;
 
     public Restaurant(){}
@@ -39,6 +56,7 @@ public class Restaurant implements Serializable {
         this.restaurantId = restaurantId;
     }
 
+    @JsonProperty("restaurantName")
     public String getRestaurantName() {
         return restaurantName;
     }
@@ -47,6 +65,7 @@ public class Restaurant implements Serializable {
         this.restaurantName = restaurantName;
     }
 
+    @JsonProperty("restaurantDistance")
     public double getRestaurantDistance() {
         return restaurantDistance;
     }
@@ -55,6 +74,7 @@ public class Restaurant implements Serializable {
         this.restaurantDistance = restaurantDistance;
     }
 
+    @JsonProperty("cuisineType")
     public String getRestaurantCuisineType() {
         return cuisineType;
     }
@@ -63,6 +83,7 @@ public class Restaurant implements Serializable {
         this.cuisineType = restaurantCuisineType;
     }
 
+    @JsonProperty("restaurantRating")
     public double getRestaurantRating() {
         return restaurantRating;
     }
@@ -71,6 +92,7 @@ public class Restaurant implements Serializable {
         this.restaurantRating = restaurantRating;
     }
 
+    @JsonProperty("restaurantRank")
     public int getRestaurantRank() {
         return restaurantRank;
     }
@@ -79,6 +101,7 @@ public class Restaurant implements Serializable {
         this.restaurantRank = rank;
     }
 
+    @JsonProperty("deliveryTips")
     public double getDeliveryTips() {
         return deliveryTips;
     }
@@ -87,6 +110,7 @@ public class Restaurant implements Serializable {
         this.deliveryTips = tips;
     }
 
+    @JsonProperty("estimatedDeliveryTime")
     public int getEstimatedDeliveryTime() {
         return estimatedDeliveryTime;
     }
@@ -95,6 +119,7 @@ public class Restaurant implements Serializable {
         this.estimatedDeliveryTime = estimatedDeliveryTime;
     }
 
+    @JsonProperty("isPickup")
     public boolean isPickup() {
         return isPickup;
     }

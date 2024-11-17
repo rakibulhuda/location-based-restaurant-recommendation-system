@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import sqa.project.back_end.models.User;
 import sqa.project.back_end.service.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user/auth")
 public class AuthController {
@@ -14,10 +16,21 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllUser() {
+        try {
+            List<User> listOfUser = userService.getAll();
+            return new ResponseEntity<>(listOfUser, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
+
         try {
-            User registeredUser = userService.registerUser(user);
+            userService.registerUser(user);
             return ResponseEntity.ok("User registered successfully");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -25,16 +38,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody User user) {
+    public ResponseEntity<?> loginUser(@RequestBody User user) {
         try {
-            boolean isAuthenticated = userService.authenticateUser(user.getUserId(), user.getPassword());
+            boolean isAuthenticated = userService.authenticateUser(user.getUsername(), user.getPassword());
             if (isAuthenticated) {
-                return new ResponseEntity<>(user, HttpStatus.OK);
+                return new ResponseEntity<>("User login successful", HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Invalid Credentials", HttpStatus.BAD_REQUEST);
             }
         } catch (RuntimeException e) {
-            return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
